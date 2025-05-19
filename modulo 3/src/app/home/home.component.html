@@ -1,0 +1,26 @@
+<ActionBar class="action-bar">
+    <NavigationButton visibility="hidden"></NavigationButton>
+    <GridLayout columns="50, *">
+        <Label class="action-bar-title" text="Home" colSpan="2"></Label>
+
+        <Label class="fas" text="&#xf0c9;" (tap)="onDrawerButtonTap()"></Label>
+    </GridLayout>
+</ActionBar>
+
+<StackLayout class="page__content" #layout>
+  <Label class="page__content-icon fas" text="&#xf015;"></Label>
+  <SearhForm (search)="onSearch($event)"></SearhForm>
+  <PullRefresh:PullToRefresh (refresh)="onPull($event)">
+    <ListView class="list-group" [items]="this.srchReslts" (itemTap)="onItemTap($event)" style="height: 1250px;">
+      <ng-template let-x="item">
+        <FlexboxLayout flexDirection="row" class="list-group-item">
+          <Image src="res://logo" class="thumb img-circle" (longPress)="onLongPress($event)"></Image>
+          <Label class="list-group-item-heading" [text]="x"
+            verticalAlignment="center" style="width: 60%"></Label>
+          <Label text="Edit" text-size="12" verticalAlignment="top" horizontalAlignment="right" (tap)="editNew($event)"></Label>
+          <Label class="fas" text="&#xf187;" horizontalAlignment="right" (tap)="onAddFav(x)"></Label>
+        </FlexboxLayout>
+      </ng-template>
+    </ListView>
+  </PullRefresh:PullToRefresh>
+</StackLayout>
